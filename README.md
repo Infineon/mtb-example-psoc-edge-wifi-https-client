@@ -8,7 +8,7 @@ This code example has a three project structure: CM33 secure, CM33 non-secure, a
 
 [View this README on GitHub.](https://github.com/Infineon/mtb-example-psoc-edge-wifi-https-client)
 
-[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDAyNTMiLCJTcGVjIE51bWJlciI6IjAwMi00MDI1MyIsIkRvYyBUaXRsZSI6IlBTT0MmdHJhZGU7IEVkZ2UgTUNVOiBIVFRQUyBDbGllbnQiLCJyaWQiOiJzdXJlc2hrdW1hcmEiLCJEb2MgdmVyc2lvbiI6IjIuMC4wIiwiRG9jIExhbmd1YWdlIjoiRW5nbGlzaCIsIkRvYyBEaXZpc2lvbiI6Ik1DRCIsIkRvYyBCVSI6IklDVyIsIkRvYyBGYW1pbHkiOiJQU09DIn0=)
+[Provide feedback on this code example.](https://cypress.co1.qualtrics.com/jfe/form/SV_1NTns53sK2yiljn?Q_EED=eyJVbmlxdWUgRG9jIElkIjoiQ0UyNDAyNTMiLCJTcGVjIE51bWJlciI6IjAwMi00MDI1MyIsIkRvYyBUaXRsZSI6IlBTT0MmdHJhZGU7IEVkZ2UgTUNVOiBIVFRQUyBDbGllbnQiLCJyaWQiOiJzdXJlc2hrdW1hcmEiLCJEb2MgdmVyc2lvbiI6IjIuMS4wIiwiRG9jIExhbmd1YWdlIjoiRW5nbGlzaCIsIkRvYyBEaXZpc2lvbiI6Ik1DRCIsIkRvYyBCVSI6IklDVyIsIkRvYyBGYW1pbHkiOiJQU09DIn0=)
 
 See the [Design and implementation](docs/design_and_implementation.md) for the functional description of this code example.
 
@@ -33,6 +33,7 @@ See the [Design and implementation](docs/design_and_implementation.md) for the f
 
 - [PSOC&trade; Edge E84 Evaluation Kit](https://www.infineon.com/KIT_PSE84_EVAL) (`KIT_PSE84_EVAL_EPC2`) – Default value of `TARGET`
 - [PSOC&trade; Edge E84 Evaluation Kit](https://www.infineon.com/KIT_PSE84_EVAL) (`KIT_PSE84_EVAL_EPC4`)
+- [PSOC&trade; Edge E84 AI Kit](https://www.infineon.com/KIT_PSE84_AI) (`KIT_PSE84_AI`)
 
 
 ## Hardware setup
@@ -42,6 +43,8 @@ This example uses the board's default configuration. See the kit user guide to e
 Ensure the following jumper and pin configuration on board.
 - BOOT SW must be in the HIGH/ON position
 - J20 and J21 must be in the tristate/not connected (NC) position
+
+> **Note:** This hardware setup is not required for KIT_PSE84_AI.
 
 
 ## Software setup
@@ -75,7 +78,7 @@ The (HTTPS Client) code example needs a server to communicate. To test this code
 
    1. Modify `keyCLIENT_CERTIFICATE_PEM` with the contents from the *mysecurehttpclient.crt* file generated in **Step 3**
    2. Modify `keyCLIENT_PRIVATE_KEY_PEM` with the contents from the *mysecurehttpclient.key* file generated in **Step 3**
-   3. Modify `keySERVER_ROOTCA_PEM` with the contents from the *rootCA.crt* file generated in **Step 3**
+   3. Modify `keySERVER_ROOTCA_PEM` with the contents from the *root_ca.crt* file generated in **Step 3**
 
 5. Open the *proj_cm33_ns* > *source* > *secure_http_client.h* and modify the `#define HTTPS_SERVER_HOST` macro to match the Server IP address that you want to connect with. Ensure that your server is connected to the same Wi-Fi Access Point (AP) that you have configured in **Step 2**
 
@@ -138,14 +141,14 @@ File                           | Description
 *mysecurehttpclient.crt* | HTTPS Client certificate
 *mysecurehttpclient.key* | HTTPS Client key
 *mysecurehttpclient.pfx* | Bundles the HTTPS client certificate and key in PKCS12 format
-*rootCA.crt* | HTTPS Server rootCA certificate to trust the client
-*rootCA.key* | HTTPS Server root key used for signing the certificate
+*root_ca.crt* | HTTPS Server root_ca certificate to trust the client
+*root_ca.key* | HTTPS Server root key used for signing the certificate
 *mysecurehttpserver.local.crt* | HTTPS Server certificate
 *mysecurehttpserver.local.key* | HTTPS Server private key
 
 <br>
 
-Configure the HTTPS client to take *mysecurehttpclient.crt* as the certificate, *mysecurehttpclient.key* as the private key, and *rootCA.crt* as the rootCA certificate.
+Configure the HTTPS client to take *mysecurehttpclient.crt* as the certificate, *mysecurehttpclient.key* as the private key, and *root_ca.crt* as the root_ca certificate.
 
 You can either convert the values to strings manually by following the format shown in *proj_cm33_ns/source/secure_keys.h* or use the *format_cert_key.py* python file inside *script folder* to convert the certificates and keys to strings by running the below command.
 
@@ -181,6 +184,7 @@ Document title: *CE240253* – *PSOC&trade; Edge MCU: HTTPS Client*
  ------- | ---------------------
  1.x.0   | New code example <br> Early access release
  2.0.0   | GitHub release
+ 2.1.0   | Added KIT_PSE84_AI BSP support
 <br>
 
 
